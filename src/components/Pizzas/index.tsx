@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Flex } from '../../styled/mixins';
+import Skeleton from '../Skeleton';
 import PizzasItem from './PizzaItem';
 
 const Title = styled.h2`
@@ -48,11 +49,15 @@ const Pizzas: FC = () => {
 		<>
 			<Title>All Pizzas</Title>
 			<PizzasWrapper>
-				{pizzaData.map((pizza: IPizza) => (
-					<PizzasItem key={pizza.id} pizza={pizza} />
-				))}
+				{!pizzaData.length
+					? [...new Array(10)].map((_, i) => <Skeleton key={i} />)
+					: pizzaData.map((pizza: IPizza) => (
+							<PizzasItem key={pizza.id} pizza={pizza} />
+							// eslint-disable-next-line no-mixed-spaces-and-tabs
+					  ))}
 			</PizzasWrapper>
 		</>
 	);
 };
+
 export default Pizzas;
