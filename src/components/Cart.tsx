@@ -12,6 +12,9 @@ const CartButton = styled.button`
 	a {
 		${Flex({ justify: 'center' })}
 	}
+	&:hover {
+		box-shadow: 0 0 0 3px #ffa600;
+	}
 `;
 
 const Cost = styled.div`

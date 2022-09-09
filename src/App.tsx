@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
 	button {
 		padding: 0;
 		border: none;
+		cursor: pointer;
 	}
 	a {
 			text-decoration: none;
