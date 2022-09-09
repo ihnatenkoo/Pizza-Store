@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { IPizza } from '.';
 import PizzaOptions from './PizzaOptions';
 
 const Item = styled.div`
@@ -19,15 +20,16 @@ const Name = styled.h3`
 	text-align: center;
 `;
 
-const PizzaItem: FC = () => {
+interface IPizzaItemProps {
+	pizza: IPizza;
+}
+
+const PizzaItem: FC<IPizzaItemProps> = ({ pizza }) => {
 	return (
 		<Item>
-			<Image
-				src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-				alt="pizza"
-			/>
-			<Name>Margherita</Name>
-			<PizzaOptions />
+			<Image src={pizza.imageUrl} alt={pizza.title} />
+			<Name>{pizza.title}</Name>
+			<PizzaOptions types={pizza.types} sizes={pizza.sizes} />
 		</Item>
 	);
 };

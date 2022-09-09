@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Flex } from '../../styled/mixins';
 
@@ -30,17 +30,51 @@ const List = styled.ul`
 	${Flex({})}
 `;
 
-const PizzaOptions: FC = () => {
+interface IPizzaOptions {
+	types: Array<string>;
+	sizes: Array<string>;
+}
+
+const PizzaOptions: FC<IPizzaOptions> = ({ types, sizes }) => {
+	const [activeType, setActiveType] = useState(types[0] ?? '');
+	const [activeSize, setActiveSize] = useState(sizes[0] ?? '');
+
+	const changeHandler = (e: any, value: string) => {
+		switch (e.target.dataset.name) {
+			case 'type':
+				setActiveType(value);
+				break;
+			case 'size':
+				setActiveSize(value);
+				break;
+		}
+	};
+
 	return (
 		<Options>
 			<List>
-				<li className="active">Slim</li>
-				<li>Standard</li>
+				{types.map((type, i) => (
+					<li
+						onClick={(e) => changeHandler(e, type)}
+						className={type === activeType ? 'active' : ''}
+						key={i}
+						data-name="type"
+					>
+						{type}
+					</li>
+				))}
 			</List>
 			<List>
-				<li>26 sm.</li>
-				<li className="active">30 sm.</li>
-				<li>40 sm.</li>
+				{sizes.map((size, i) => (
+					<li
+						onClick={(e) => changeHandler(e, size)}
+						className={size === activeSize ? 'active' : ''}
+						key={i}
+						data-name="size"
+					>
+						{size} sm.
+					</li>
+				))}
 			</List>
 		</Options>
 	);

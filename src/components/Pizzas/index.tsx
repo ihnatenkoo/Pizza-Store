@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Flex } from '../../styled/mixins';
 import PizzasItem from './PizzaItem';
 
 const Title = styled.h2`
@@ -9,11 +10,48 @@ const Title = styled.h2`
 	color: ${(props) => props.theme.colors.blackDark};
 `;
 
+const PizzasWrapper = styled.div`
+	${Flex({ wrap: 'wrap', gap: '40px 30px', justify: 'space-between' })}
+`;
+
+export interface IPizza {
+	id: string;
+	imageUrl: string;
+	title: string;
+	types: Array<string>;
+	sizes: Array<string>;
+	price: number;
+	category: number;
+	rating: number;
+}
+
 const Pizzas: FC = () => {
+	const [pizzaData, setPizzaData] = useState<Array<IPizza>>([]);
+
+	const getData = async () => {
+		try {
+			const response = await fetch(
+				'https://631b13b6fae3df4dcff3dc92.mockapi.io/api/pizzas'
+			);
+			const data = await response.json();
+			setPizzaData(data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	useEffect(() => {
+		getData();
+	}, []);
+
 	return (
 		<>
 			<Title>All Pizzas</Title>
-			<PizzasItem />
+			<PizzasWrapper>
+				{pizzaData.map((pizza: IPizza) => (
+					<PizzasItem key={pizza.id} pizza={pizza} />
+				))}
+			</PizzasWrapper>
 		</>
 	);
 };
