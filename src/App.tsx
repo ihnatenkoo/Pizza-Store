@@ -1,8 +1,9 @@
 import 'material-icons/iconfont/material-icons.css';
 
 import { FC } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import HomePage from './pages/Home';
+import { HomePage, CartPage } from './pages/';
 
 const GlobalStyle = createGlobalStyle`
 	*, ::before, ::after {
@@ -20,7 +21,9 @@ const GlobalStyle = createGlobalStyle`
 	button {
 		padding: 0;
 		border: none;
-
+	}
+	a {
+			text-decoration: none;
 	}
 `;
 
@@ -51,7 +54,12 @@ const App: FC = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
-			<HomePage />
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/cart" element={<CartPage />} />
+				</Routes>
+			</BrowserRouter>
 		</ThemeProvider>
 	);
 };

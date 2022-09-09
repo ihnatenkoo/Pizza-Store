@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import Header from '../components/Header';
 
 const Main = styled.main`
 	padding: 50px;
@@ -17,7 +18,10 @@ const Box = styled.div`
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<Main>
-			<Box>{children}</Box>
+			<Box>
+				<Header />
+				{children}
+			</Box>
 		</Main>
 	);
 };

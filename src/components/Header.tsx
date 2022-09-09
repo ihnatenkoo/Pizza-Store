@@ -39,7 +39,6 @@ const Header: FC = () => {
 					<Description>The most delicious pizza in the universe</Description>
 				</div>
 			</Intro>
-
 			<Cart />
 		</StyledHeader>
 	);

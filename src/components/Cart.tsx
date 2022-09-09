@@ -1,13 +1,17 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Flex } from '../styled/mixins';
 
 const CartButton = styled.button`
-	${Flex({ justify: 'center' })}
 	padding: 12px 10px;
 	background-color: ${(props) => props.theme.colors.orange};
 	border-radius: ${(props) => props.theme.radius.radiusM};
 	cursor: pointer;
+
+	a {
+		${Flex({ justify: 'center' })}
+	}
 `;
 
 const Cost = styled.div`
@@ -32,14 +36,16 @@ const Text = styled.div`
 const Cart: FC = () => {
 	return (
 		<CartButton>
-			<Cost>
-				<Text>0</Text>
-				<span className="material-icons-outlined">euro_symbol</span>
-			</Cost>
-			<Count>
-				<span className="material-icons-outlined">shopping_cart</span>
-				<Text>0</Text>
-			</Count>
+			<Link to="/cart">
+				<Cost>
+					<Text>0</Text>
+					<span className="material-icons-outlined">euro_symbol</span>
+				</Cost>
+				<Count>
+					<span className="material-icons-outlined">shopping_cart</span>
+					<Text>0</Text>
+				</Count>
+			</Link>
 		</CartButton>
 	);
 };
