@@ -25,6 +25,9 @@ const GlobalStyle = createGlobalStyle`
 	a {
 			text-decoration: none;
 	}
+	li {
+		list-style: none;
+	}
 `;
 
 const theme = {
@@ -34,12 +37,14 @@ const theme = {
 		white: '#ffffff',
 		blackDark: '#181818',
 		blackMedium: '#2C2C2C',
+		grayLight: '#F3F3F3',
 		grayDark: '#7B7B7B',
 	},
 	shadows: {
 		main: '0px 15px 20px rgba(0, 0, 0, 0.03)',
 	},
 	radius: {
+		radiusS: '10px',
 		radiusM: '30px',
 	},
 	media: {
