@@ -5,8 +5,9 @@ import MainLayout from '../layout/MainLayout';
 const HomePage: FC = () => {
 	return (
 		<MainLayout>
-			<Header withCart />
+			<Header />
 		</MainLayout>
 	);
 };
+
 export default HomePage;

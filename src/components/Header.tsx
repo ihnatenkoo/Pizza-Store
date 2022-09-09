@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Flex } from '../styled/mixins';
+import Cart from './Cart';
 
 const StyledHeader = styled.header`
 	padding-bottom: 40px;
@@ -28,11 +29,7 @@ const Description = styled.span`
 	color: ${(props) => props.theme.colors.grayDark};
 `;
 
-interface IHeaderProps {
-	withCart?: boolean;
-}
-
-const Header: FC<IHeaderProps> = ({ withCart = false }) => {
+const Header: FC = () => {
 	return (
 		<StyledHeader>
 			<Intro>
@@ -43,7 +40,7 @@ const Header: FC<IHeaderProps> = ({ withCart = false }) => {
 				</div>
 			</Intro>
 
-			{withCart && <div>Cart</div>}
+			<Cart />
 		</StyledHeader>
 	);
 };

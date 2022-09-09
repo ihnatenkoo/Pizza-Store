@@ -1,6 +1,8 @@
+import 'material-icons/iconfont/material-icons.css';
+
 import { FC } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/Home';
 
 const GlobalStyle = createGlobalStyle`
 	*, ::before, ::after {
@@ -15,18 +17,27 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		overflow-x: hidden;
 	}
+	button {
+		padding: 0;
+		border: none;
+
+	}
 `;
 
 const theme = {
 	colors: {
 		yellow: '#FFDF8C',
+		orange: '#FE5F1E',
 		white: '#ffffff',
 		blackDark: '#181818',
 		blackMedium: '#2C2C2C',
-		grayDark: '#7B7B7B;',
+		grayDark: '#7B7B7B',
 	},
 	shadows: {
-		main: '0px 15px 20px rgba(0, 0, 0, 0.03);',
+		main: '0px 15px 20px rgba(0, 0, 0, 0.03)',
+	},
+	radius: {
+		radiusM: '30px',
 	},
 	media: {
 		mobileM: `(min-width: 375px)`,
