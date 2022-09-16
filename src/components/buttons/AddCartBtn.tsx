@@ -1,5 +1,8 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { ADD_ITEM } from '../../store/cart/cart.slice';
+import { IOrder } from '../../store/cart/types';
 import { Flex } from '../../styled/mixins';
 
 const Button = styled.button`
@@ -20,9 +23,19 @@ const Button = styled.button`
 	}
 `;
 
-const AddCartBtn: FC = () => {
+interface ICartBtnProps {
+	orderData: IOrder;
+}
+
+const AddCartBtn: FC<ICartBtnProps> = ({ orderData }) => {
+	const dispatch = useAppDispatch();
+
+	const addOrderItemHandler = () => {
+		dispatch(ADD_ITEM(orderData));
+	};
+
 	return (
-		<Button>
+		<Button onClick={addOrderItemHandler}>
 			<span className="material-icons-outlined">add</span>
 			Add to cart
 		</Button>

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IPizza } from '.';
 import { Flex } from '../../styled/mixins';
@@ -37,6 +37,27 @@ interface IPizzaItemProps {
 const PizzaItem: FC<IPizzaItemProps> = ({ pizza }) => {
 	const [activeType, setActiveType] = useState(0);
 	const [activeSize, setActiveSize] = useState(0);
+	const [itemPrice, setItemPrice] = useState(pizza.prices[0]);
+
+	const calculateCost = (
+		activeType: number,
+		activeSize: number,
+		prices: Array<number>
+	): void =>
+		setItemPrice(
+			activeType === 0 ? prices[activeSize] : prices[activeSize] + 0.25
+		);
+
+	useEffect(() => {
+		calculateCost(activeType, activeSize, pizza.prices);
+	}, [activeType, activeSize]);
+
+	const orderData = {
+		title: pizza.title,
+		type: pizza.types[activeType],
+		size: pizza.sizes[activeSize],
+		cost: itemPrice,
+	};
 
 	return (
 		<Item>
@@ -51,13 +72,8 @@ const PizzaItem: FC<IPizzaItemProps> = ({ pizza }) => {
 				setActiveSize={setActiveSize}
 			/>
 			<Footer>
-				<Cost>
-					{activeType === 0
-						? pizza.prices[activeSize]
-						: pizza.prices[activeSize] + 0.25}
-					€
-				</Cost>
-				<AddCartBtn />
+				<Cost>{itemPrice} €</Cost>
+				<AddCartBtn orderData={orderData} />
 			</Footer>
 		</Item>
 	);
