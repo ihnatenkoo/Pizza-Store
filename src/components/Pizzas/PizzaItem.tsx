@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { IPizza } from '.';
 import { Flex } from '../../styled/mixins';
@@ -25,11 +25,8 @@ const Footer = styled.div`
 	margin-top: 15px;
 `;
 const Cost = styled.span`
-	span {
-		font-size: 22px;
-		font-weight: 700;
-	}
-	font-size: 20px;
+	font-size: 22px;
+	font-weight: 700;
 	color: ${(props) => props.theme.colors.blackDark};
 `;
 
@@ -38,14 +35,27 @@ interface IPizzaItemProps {
 }
 
 const PizzaItem: FC<IPizzaItemProps> = ({ pizza }) => {
+	const [activeType, setActiveType] = useState(0);
+	const [activeSize, setActiveSize] = useState(0);
+
 	return (
 		<Item>
 			<Image src={pizza.imageUrl} alt={pizza.title} />
 			<Name>{pizza.title}</Name>
-			<PizzaOptions types={pizza.types} sizes={pizza.sizes} />
+			<PizzaOptions
+				types={pizza.types}
+				sizes={pizza.sizes}
+				activeType={activeType}
+				activeSize={activeSize}
+				setActiveType={setActiveType}
+				setActiveSize={setActiveSize}
+			/>
 			<Footer>
 				<Cost>
-					from <span>{pizza.price} €</span>
+					{activeType === 0
+						? pizza.prices[activeSize]
+						: pizza.prices[activeSize] + 0.25}
+					€
 				</Cost>
 				<AddCartBtn />
 			</Footer>

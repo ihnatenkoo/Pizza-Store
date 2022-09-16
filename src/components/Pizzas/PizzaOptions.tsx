@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, SetStateAction, Dispatch } from 'react';
 import styled from 'styled-components';
 import { Flex } from '../../styled/mixins';
 
@@ -33,13 +33,21 @@ const List = styled.ul`
 interface IPizzaOptions {
 	types: Array<string>;
 	sizes: Array<string>;
+	activeType: number;
+	activeSize: number;
+	setActiveType: Dispatch<SetStateAction<number>>;
+	setActiveSize: Dispatch<SetStateAction<number>>;
 }
 
-const PizzaOptions: FC<IPizzaOptions> = ({ types, sizes }) => {
-	const [activeType, setActiveType] = useState(types[0] ?? '');
-	const [activeSize, setActiveSize] = useState(sizes[0] ?? '');
-
-	const changeHandler = (e: any, value: string) => {
+const PizzaOptions: FC<IPizzaOptions> = ({
+	types,
+	sizes,
+	activeType,
+	activeSize,
+	setActiveType,
+	setActiveSize,
+}) => {
+	const changeHandler = (e: any, value: number) => {
 		switch (e.target.dataset.name) {
 			case 'type':
 				setActiveType(value);
@@ -55,8 +63,8 @@ const PizzaOptions: FC<IPizzaOptions> = ({ types, sizes }) => {
 			<List>
 				{types.map((type, i) => (
 					<li
-						onClick={(e) => changeHandler(e, type)}
-						className={type === activeType ? 'active' : ''}
+						onClick={(e) => changeHandler(e, i)}
+						className={i === activeType ? 'active' : ''}
 						key={i}
 						data-name="type"
 					>
@@ -67,8 +75,8 @@ const PizzaOptions: FC<IPizzaOptions> = ({ types, sizes }) => {
 			<List>
 				{sizes.map((size, i) => (
 					<li
-						onClick={(e) => changeHandler(e, size)}
-						className={size === activeSize ? 'active' : ''}
+						onClick={(e) => changeHandler(e, i)}
+						className={i === activeSize ? 'active' : ''}
 						key={i}
 						data-name="size"
 					>
