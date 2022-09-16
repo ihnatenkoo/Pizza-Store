@@ -3,6 +3,7 @@ export interface IOrder {
 	type: string;
 	size: string;
 	cost: number;
+	count: number;
 }
 
 export enum ActionTypes {

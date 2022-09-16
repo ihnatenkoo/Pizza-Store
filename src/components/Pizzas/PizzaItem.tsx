@@ -57,6 +57,7 @@ const PizzaItem: FC<IPizzaItemProps> = ({ pizza }) => {
 		type: pizza.types[activeType],
 		size: pizza.sizes[activeSize],
 		cost: itemPrice,
+		count: 1,
 	};
 
 	return (

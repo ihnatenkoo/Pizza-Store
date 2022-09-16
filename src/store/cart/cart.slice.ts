@@ -17,12 +17,28 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		[ActionTypes.ADD_ITEM]: (state, action: PayloadAction<IOrder>) => {
-			state.order.push(action.payload);
+			if (
+				state.order.some(
+					(item) =>
+						item.title === action.payload.title &&
+						item.type === action.payload.type &&
+						item.size === action.payload.size
+				)
+			) {
+				state.order = state.order.map((item) => {
+					if (item.title === action.payload.title) {
+						return { ...item, count: item.count + 1 };
+					}
+					return item;
+				});
+			} else {
+				state.order.push(action.payload);
+			}
 		},
 		[ActionTypes.CALCULATE_TOTAL_COST]: (state) => {
 			state.totalCost = +state.order
 				.reduce((curr, next) => {
-					return curr + next.cost;
+					return curr + next.count * next.cost;
 				}, 0)
 				.toFixed(3);
 		},
