@@ -1,6 +1,10 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { ADD_ITEM, CALCULATE_TOTAL_COST } from '../../store/cart/cart.slice';
+import {
+	ADD_ITEM,
+	CALCULATE_TOTAL_COST,
+	CALCULATE_TOTAL_COUNT,
+} from '../../store/cart/cart.slice';
 import { IOrder } from '../../store/cart/types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Flex } from '../../styled/mixins';
@@ -33,6 +37,7 @@ const AddCartBtn: FC<ICartBtnProps> = ({ orderData }) => {
 	const addOrderItemHandler = () => {
 		dispatch(ADD_ITEM(orderData));
 		dispatch(CALCULATE_TOTAL_COST());
+		dispatch(CALCULATE_TOTAL_COUNT());
 	};
 
 	return (

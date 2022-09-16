@@ -41,6 +41,7 @@ const theme = {
 		blackDark: '#181818',
 		blackMedium: '#2C2C2C',
 		grayLight: '#F3F3F3',
+		gray: '#B6B6B6',
 		grayDark: '#7B7B7B',
 	},
 	shadows: {

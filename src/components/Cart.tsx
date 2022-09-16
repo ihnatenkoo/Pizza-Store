@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '../hooks/useAppSelector';
-import { IOrder } from '../store/cart/types';
 import { Flex } from '../styled/mixins';
 
 const CartButton = styled.button`
@@ -40,14 +39,8 @@ const Text = styled.div`
 `;
 
 const Cart: FC = () => {
-	const order = useAppSelector((state) => state.cart.order);
 	const totalCost = useAppSelector((state) => state.cart.totalCost);
-
-	const calcOrderCount = (order: Array<IOrder>): number => {
-		return order.reduce((curr, next) => {
-			return curr + next.count;
-		}, 0);
-	};
+	const totalCount = useAppSelector((state) => state.cart.totalCount);
 
 	return (
 		<CartButton>
@@ -58,7 +51,7 @@ const Cart: FC = () => {
 				</Cost>
 				<Count>
 					<span className="material-icons-outlined">shopping_cart</span>
-					<Text>{calcOrderCount(order)}</Text>
+					<Text>{totalCount}</Text>
 				</Count>
 			</Link>
 		</CartButton>

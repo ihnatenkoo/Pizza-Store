@@ -5,11 +5,13 @@ import { ActionTypes, IOrder } from './types';
 interface ICartInitialState {
 	order: Array<IOrder>;
 	totalCost: number;
+	totalCount: number;
 }
 
 const initialState: ICartInitialState = {
 	order: [],
 	totalCost: 0,
+	totalCount: 0,
 };
 
 const cartSlice = createSlice({
@@ -42,10 +44,25 @@ const cartSlice = createSlice({
 				}, 0)
 				.toFixed(3);
 		},
+		[ActionTypes.CALCULATE_TOTAL_COUNT]: (state) => {
+			state.totalCount = state.order.reduce((curr, next) => {
+				return curr + next.count;
+			}, 0);
+		},
+		[ActionTypes.CLEAR_CART]: (state) => {
+			state.order = [];
+			state.totalCost = 0;
+			state.totalCount = 0;
+		},
 	},
 });
 
 const { actions, reducer } = cartSlice;
 
 export default reducer;
-export const { ADD_ITEM, CALCULATE_TOTAL_COST } = actions;
+export const {
+	ADD_ITEM,
+	CALCULATE_TOTAL_COST,
+	CALCULATE_TOTAL_COUNT,
+	CLEAR_CART,
+} = actions;
