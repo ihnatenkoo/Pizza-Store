@@ -2,6 +2,8 @@ import 'material-icons/iconfont/material-icons.css';
 
 import { FC } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { HomePage, CartPage } from './pages/';
 
@@ -60,12 +62,14 @@ const App: FC = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<HomePage />} />
-					<Route path="/cart" element={<CartPage />} />
-				</Routes>
-			</BrowserRouter>
+			<Provider store={store}>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<HomePage />} />
+						<Route path="/cart" element={<CartPage />} />
+					</Routes>
+				</BrowserRouter>
+			</Provider>
 		</ThemeProvider>
 	);
 };
