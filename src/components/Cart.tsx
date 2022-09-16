@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAppSelector } from '../hooks/useAppSelector';
 import { Flex } from '../styled/mixins';
 
 const CartButton = styled.button`
@@ -37,19 +38,23 @@ const Text = styled.div`
 `;
 
 const Cart: FC = () => {
+	const order = useAppSelector((state) => state.cart.order);
+	const totalCost = useAppSelector((state) => state.cart.totalCost);
+
 	return (
 		<CartButton>
 			<Link to="/cart">
 				<Cost>
-					<Text>0</Text>
+					<Text>{totalCost}</Text>
 					<span className="material-icons-outlined">euro_symbol</span>
 				</Cost>
 				<Count>
 					<span className="material-icons-outlined">shopping_cart</span>
-					<Text>0</Text>
+					<Text>{order.length}</Text>
 				</Count>
 			</Link>
 		</CartButton>
 	);
 };
+
 export default Cart;

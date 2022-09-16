@@ -7,4 +7,5 @@ export interface IOrder {
 
 export enum ActionTypes {
 	ADD_ITEM = 'ADD_ITEM',
+	CALCULATE_TOTAL_COST = 'CALCULATE_TOTAL_COST',
 }
