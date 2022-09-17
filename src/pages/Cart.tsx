@@ -95,7 +95,7 @@ export const CartPage: FC = () => {
 
 				<OrderList>
 					{order.map((item) => (
-						<OrderItem key={item.title} item={item} />
+						<OrderItem key={item.id} item={item} />
 					))}
 				</OrderList>
 

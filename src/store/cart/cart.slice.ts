@@ -27,16 +27,23 @@ const cartSlice = createSlice({
 						item.size === action.payload.size
 				)
 			) {
+				console.log(2);
 				state.order = state.order.map((item) => {
-					if (item.title === action.payload.title) {
+					if (item.id === action.payload.id) {
 						return { ...item, count: item.count + 1 };
 					}
 					return item;
 				});
 			} else {
+				console.log(1);
 				state.order.push(action.payload);
 			}
 		},
+
+		[ActionTypes.REMOVE_ITEM]: (state, action) => {
+			state.order = state.order.filter((item) => item.id !== action.payload);
+		},
+
 		[ActionTypes.CALCULATE_TOTAL_COST]: (state) => {
 			state.totalCost = +state.order
 				.reduce((curr, next) => {
@@ -62,6 +69,7 @@ const { actions, reducer } = cartSlice;
 export default reducer;
 export const {
 	ADD_ITEM,
+	REMOVE_ITEM,
 	CALCULATE_TOTAL_COST,
 	CALCULATE_TOTAL_COUNT,
 	CLEAR_CART,

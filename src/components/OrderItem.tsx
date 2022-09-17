@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { REMOVE_ITEM } from '../store/cart/cart.slice';
 import { IOrder } from '../store/cart/types';
 import { Flex } from '../styled/mixins';
 
@@ -58,6 +60,12 @@ interface IOrderItemProps {
 }
 
 const OrderItem: FC<IOrderItemProps> = ({ item }) => {
+	const dispatch = useAppDispatch();
+
+	const onREmoveHandler = (id: string): void => {
+		dispatch(REMOVE_ITEM(id));
+	};
+
 	return (
 		<StyledOrderItem key={item.title}>
 			<OrderInfo>
@@ -76,9 +84,13 @@ const OrderItem: FC<IOrderItemProps> = ({ item }) => {
 				<img src="/img/icons/plus.svg" alt="decrease" />
 			</Counter>
 
-			<Cost>{item.count * item.cost}</Cost>
+			<Cost>{(item.count * item.cost).toFixed(2)}</Cost>
 
-			<Delete src="/img/icons/delete.svg" alt="delete"></Delete>
+			<Delete
+				onClick={() => onREmoveHandler(item.id)}
+				src="/img/icons/delete.svg"
+				alt="delete"
+			></Delete>
 		</StyledOrderItem>
 	);
 };
