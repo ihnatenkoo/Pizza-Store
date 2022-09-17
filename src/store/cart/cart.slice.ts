@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { ActionTypes, IOrder } from './types';
+import { ActionTypes, IOrder } from '../types';
 
 interface ICartInitialState {
 	order: Array<IOrder>;
@@ -30,12 +30,14 @@ const cartSlice = createSlice({
 				state.order.push(action.payload);
 			}
 		},
-
-		[ActionTypes.REMOVE_ITEM]: (state, action) => {
+		[ActionTypes.REMOVE_ITEM]: (state, action: PayloadAction<string>) => {
 			state.order = state.order.filter((item) => item.id !== action.payload);
 		},
 
-		[ActionTypes.CHANGE_COUNT]: (state, action) => {
+		[ActionTypes.CHANGE_COUNT]: (
+			state,
+			action: { payload: { id: string; value: number } }
+		) => {
 			state.order = state.order
 				.map((item) => {
 					if (item.id === action.payload.id) {
@@ -45,7 +47,6 @@ const cartSlice = createSlice({
 				})
 				.filter((item) => item.count > 0);
 		},
-
 		[ActionTypes.CALCULATE_TOTAL_COST_COUNT]: (state) => {
 			state.totalCost = +state.order
 				.reduce((curr, next) => {

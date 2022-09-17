@@ -64,6 +64,7 @@ const TotalCount = styled(TotalTitle)`
 const CostTitle = styled(TotalTitle)``;
 const CostTotal = styled(TotalCount)`
 	${Flex({ align: 'flex-start' })}
+	min-width: 95px;
 	color: ${(props) => props.theme.colors.orange};
 `;
 

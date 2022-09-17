@@ -1,5 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { GET_PIZZA_DATA } from '../../store/pizzas/pizzas.slice';
 import { Flex } from '../../styled/mixins';
 import Skeleton from '../Skeleton';
 import PizzasItem from './PizzaItem';
@@ -27,29 +30,24 @@ export interface IPizza {
 }
 
 const Pizzas: FC = () => {
-	const [pizzaData, setPizzaData] = useState<Array<IPizza>>([]);
-
-	const getData = async () => {
-		try {
-			const response = await fetch(
-				'https://631b13b6fae3df4dcff3dc92.mockapi.io/api/pizzas'
-			);
-			const data = await response.json();
-			setPizzaData(data);
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	const dispatch = useAppDispatch();
+	const pizzaData = useAppSelector((state) => state.pizzas.pizzaData);
+	const isError = useAppSelector((state) => state.pizzas.isError);
+	const isLoading = useAppSelector((state) => state.pizzas.isLoading);
 
 	useEffect(() => {
-		getData();
+		dispatch(GET_PIZZA_DATA());
 	}, []);
+
+	if (isError) {
+		return <p>Loading Error...</p>;
+	}
 
 	return (
 		<>
 			<Title>All Pizzas</Title>
 			<PizzasWrapper>
-				{!pizzaData.length
+				{isLoading
 					? [...new Array(10)].map((_, i) => <Skeleton key={i} />)
 					: pizzaData.map((pizza: IPizza) => (
 							<PizzasItem key={pizza.id} pizza={pizza} />

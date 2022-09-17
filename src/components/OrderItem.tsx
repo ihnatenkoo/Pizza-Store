@@ -6,7 +6,7 @@ import {
 	CHANGE_COUNT,
 	REMOVE_ITEM,
 } from '../store/cart/cart.slice';
-import { IOrder } from '../store/cart/types';
+import { IOrder } from '../store/types';
 import { Flex } from '../styled/mixins';
 
 const StyledOrderItem = styled.li`
@@ -66,15 +66,12 @@ interface IOrderItemProps {
 const OrderItem: FC<IOrderItemProps> = ({ item }) => {
 	const dispatch = useAppDispatch();
 
-	const onChangeCountHandler = (
-		id: string | undefined,
-		value: number
-	): void => {
+	const onChangeCountHandler = (id: string, value: number): void => {
 		dispatch(CHANGE_COUNT({ id, value }));
 		dispatch(CALCULATE_TOTAL_COST_COUNT());
 	};
 
-	const onRemoveHandler = (id: string | undefined): void => {
+	const onRemoveHandler = (id: string): void => {
 		dispatch(REMOVE_ITEM(id));
 		dispatch(CALCULATE_TOTAL_COST_COUNT());
 	};

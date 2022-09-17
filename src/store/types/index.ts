@@ -8,6 +8,17 @@ export interface IOrder {
 	count: number;
 }
 
+export interface IPizza {
+	id: string;
+	imageUrl: string;
+	title: string;
+	types: Array<string>;
+	sizes: Array<string>;
+	prices: Array<number>;
+	category: number;
+	rating: number;
+}
+
 export enum ActionTypes {
 	ADD_ITEM = 'ADD_ITEM',
 	REMOVE_ITEM = 'REMOVE_ITEM',

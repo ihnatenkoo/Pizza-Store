@@ -4,7 +4,7 @@ import {
 	ADD_ITEM,
 	CALCULATE_TOTAL_COST_COUNT,
 } from '../../store/cart/cart.slice';
-import { IOrder } from '../../store/cart/types';
+import { IOrder } from '../../store/types';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Flex } from '../../styled/mixins';
 
