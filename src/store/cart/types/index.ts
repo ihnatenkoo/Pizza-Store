@@ -2,6 +2,7 @@ export interface IOrder {
 	title: string;
 	type: string;
 	size: string;
+	imageUrl: string;
 	cost: number;
 	count: number;
 }

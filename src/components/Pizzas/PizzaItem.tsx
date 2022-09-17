@@ -58,6 +58,7 @@ const PizzaItem: FC<IPizzaItemProps> = ({ pizza }) => {
 		size: pizza.sizes[activeSize],
 		cost: itemPrice,
 		count: 1,
+		imageUrl: pizza.imageUrl,
 	};
 
 	return (

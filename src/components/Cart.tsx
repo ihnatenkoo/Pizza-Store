@@ -5,7 +5,6 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import { Flex } from '../styled/mixins';
 
 const CartButton = styled.button`
-	padding: 12px 10px;
 	min-width: 157px;
 	background-color: ${(props) => props.theme.colors.orange};
 	border-radius: ${(props) => props.theme.radius.radiusM};
@@ -13,6 +12,7 @@ const CartButton = styled.button`
 
 	a {
 		${Flex({ justify: 'center' })}
+		padding: 15px 0;
 	}
 	&:hover {
 		box-shadow: 0 0 0 3px #ffa600;

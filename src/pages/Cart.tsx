@@ -5,6 +5,7 @@ import { Container, Flex } from '../styled/mixins';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { CLEAR_CART } from '../store/cart/cart.slice';
+import OrderItem from '../components/OrderItem';
 
 const Wrapper = styled.section`
 	${Container({})}
@@ -45,7 +46,7 @@ const ClearCart = styled.div`
 
 const Footer = styled.div`
 	${Flex({ justify: 'space-between' })}
-	margin-bottom: 40px;
+	margin: 40px 0;
 `;
 
 const FooterLeft = styled.div`
@@ -66,8 +67,11 @@ const CostTotal = styled(TotalCount)`
 	color: ${(props) => props.theme.colors.orange};
 `;
 
+const OrderList = styled.ul``;
+
 export const CartPage: FC = () => {
 	const dispatch = useAppDispatch();
+	const order = useAppSelector((state) => state.cart.order);
 	const totalCost = useAppSelector((state) => state.cart.totalCost);
 	const totalCount = useAppSelector((state) => state.cart.totalCount);
 
@@ -88,6 +92,12 @@ export const CartPage: FC = () => {
 						<span>Clear cart</span>
 					</ClearCart>
 				</Header>
+
+				<OrderList>
+					{order.map((item) => (
+						<OrderItem key={item.title} item={item} />
+					))}
+				</OrderList>
 
 				<Footer>
 					<FooterLeft>

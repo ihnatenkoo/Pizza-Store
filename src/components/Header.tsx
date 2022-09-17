@@ -38,7 +38,7 @@ const Header: FC = () => {
 		<StyledHeader>
 			<Intro>
 				<Link to="/">
-					<Logo src="/src/assets/logo.svg" alt="pizza logo" />
+					<Logo src="/img/logo.svg" alt="pizza logo" />
 					<div>
 						<Title>Pizza Store</Title>
 						<Description>The most delicious pizza in the universe</Description>
