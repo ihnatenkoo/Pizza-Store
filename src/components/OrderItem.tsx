@@ -1,7 +1,11 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '../hooks/useAppDispatch';
-import { REMOVE_ITEM } from '../store/cart/cart.slice';
+import {
+	CALCULATE_TOTAL_COST_COUNT,
+	CHANGE_COUNT,
+	REMOVE_ITEM,
+} from '../store/cart/cart.slice';
 import { IOrder } from '../store/cart/types';
 import { Flex } from '../styled/mixins';
 
@@ -46,7 +50,7 @@ const Counter = styled.div`
 `;
 
 const Cost = styled.span`
-	min-width: 45px;
+	min-width: 60px;
 	font-weight: 700;
 	font-size: 22px;
 `;
@@ -62,8 +66,17 @@ interface IOrderItemProps {
 const OrderItem: FC<IOrderItemProps> = ({ item }) => {
 	const dispatch = useAppDispatch();
 
-	const onREmoveHandler = (id: string): void => {
+	const onChangeCountHandler = (
+		id: string | undefined,
+		value: number
+	): void => {
+		dispatch(CHANGE_COUNT({ id, value }));
+		dispatch(CALCULATE_TOTAL_COST_COUNT());
+	};
+
+	const onRemoveHandler = (id: string | undefined): void => {
 		dispatch(REMOVE_ITEM(id));
+		dispatch(CALCULATE_TOTAL_COST_COUNT());
 	};
 
 	return (
@@ -79,15 +92,23 @@ const OrderItem: FC<IOrderItemProps> = ({ item }) => {
 			</OrderInfo>
 
 			<Counter>
-				<img src="/img/icons/minus.svg" alt="increase" />
+				<img
+					onClick={() => onChangeCountHandler(item.id, -1)}
+					src="/img/icons/minus.svg"
+					alt="increase"
+				/>
 				<span>{item.count}</span>
-				<img src="/img/icons/plus.svg" alt="decrease" />
+				<img
+					onClick={() => onChangeCountHandler(item.id, 1)}
+					src="/img/icons/plus.svg"
+					alt="decrease"
+				/>
 			</Counter>
 
 			<Cost>{(item.count * item.cost).toFixed(2)}</Cost>
 
 			<Delete
-				onClick={() => onREmoveHandler(item.id)}
+				onClick={() => onRemoveHandler(item.id)}
 				src="/img/icons/delete.svg"
 				alt="delete"
 			></Delete>

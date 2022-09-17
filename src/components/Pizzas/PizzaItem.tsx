@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { nanoid } from '@reduxjs/toolkit';
 import { IPizza } from '.';
 import { Flex } from '../../styled/mixins';
 import AddCartBtn from '../buttons/AddCartBtn';
@@ -54,7 +53,7 @@ const PizzaItem: FC<IPizzaItemProps> = ({ pizza }) => {
 	}, [activeType, activeSize]);
 
 	const orderData = {
-		id: nanoid(),
+		id: pizza.id + pizza.types[activeType] + pizza.sizes[activeSize],
 		title: pizza.title,
 		type: pizza.types[activeType],
 		size: pizza.sizes[activeSize],

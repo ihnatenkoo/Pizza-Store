@@ -19,15 +19,7 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		[ActionTypes.ADD_ITEM]: (state, action: PayloadAction<IOrder>) => {
-			if (
-				state.order.some(
-					(item) =>
-						item.title === action.payload.title &&
-						item.type === action.payload.type &&
-						item.size === action.payload.size
-				)
-			) {
-				console.log(2);
+			if (state.order.some((item) => item.id === action.payload.id)) {
 				state.order = state.order.map((item) => {
 					if (item.id === action.payload.id) {
 						return { ...item, count: item.count + 1 };
@@ -35,7 +27,6 @@ const cartSlice = createSlice({
 					return item;
 				});
 			} else {
-				console.log(1);
 				state.order.push(action.payload);
 			}
 		},
@@ -44,14 +35,24 @@ const cartSlice = createSlice({
 			state.order = state.order.filter((item) => item.id !== action.payload);
 		},
 
-		[ActionTypes.CALCULATE_TOTAL_COST]: (state) => {
+		[ActionTypes.CHANGE_COUNT]: (state, action) => {
+			state.order = state.order
+				.map((item) => {
+					if (item.id === action.payload.id) {
+						return { ...item, count: item.count + action.payload.value };
+					}
+					return item;
+				})
+				.filter((item) => item.count > 0);
+		},
+
+		[ActionTypes.CALCULATE_TOTAL_COST_COUNT]: (state) => {
 			state.totalCost = +state.order
 				.reduce((curr, next) => {
 					return curr + next.count * next.cost;
 				}, 0)
 				.toFixed(3);
-		},
-		[ActionTypes.CALCULATE_TOTAL_COUNT]: (state) => {
+
 			state.totalCount = state.order.reduce((curr, next) => {
 				return curr + next.count;
 			}, 0);
@@ -70,7 +71,7 @@ export default reducer;
 export const {
 	ADD_ITEM,
 	REMOVE_ITEM,
-	CALCULATE_TOTAL_COST,
-	CALCULATE_TOTAL_COUNT,
+	CHANGE_COUNT,
+	CALCULATE_TOTAL_COST_COUNT,
 	CLEAR_CART,
 } = actions;
