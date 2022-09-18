@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Flex } from '../../styled/mixins';
 
-import { IPizza } from '../../store/types/';
+import { IPizza } from '../../types/';
 import AddCartBtn from '../buttons/AddCartBtn';
 import PizzaOptions from './PizzaOptions';
 

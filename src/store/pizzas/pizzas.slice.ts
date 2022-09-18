@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPizza } from '../types';
+import { IPizza } from '../../types/';
 import { ActionTypesPizza } from '../types';
 
 interface IPizzaInitialState {

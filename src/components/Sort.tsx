@@ -1,20 +1,16 @@
 import { FC, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { useAppSelector } from '../hooks/useAppSelector';
+import { enumSortList, IActiveProps } from '../types';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { SET_SORT } from '../store/pizzas/pizzas.slice';
 
 const sortList = [
-	'None',
-	'Price: Low',
-	'Price: Hight',
-	`Name: Start`,
-	`Name: End`,
+	enumSortList.NONE,
+	enumSortList.PRICE_LOW,
+	enumSortList.PRICE_HIGH,
+	enumSortList.NAME_START,
+	enumSortList.NAME_END,
 ];
-
-interface IActiveProps {
-	active: boolean;
-}
 
 const fadeInText = keyframes`	
 0% {

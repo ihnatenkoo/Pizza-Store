@@ -1,24 +1,3 @@
-export interface IOrder {
-	id: string;
-	title: string;
-	type: string;
-	size: string;
-	imageUrl: string;
-	cost: number;
-	count: number;
-}
-
-export interface IPizza {
-	id: string;
-	imageUrl: string;
-	title: string;
-	types: Array<string>;
-	sizes: Array<string>;
-	prices: Array<number>;
-	category: Array<string>;
-	rating: number;
-}
-
 export enum ActionTypesCart {
 	ADD_ITEM = 'ADD_ITEM',
 	REMOVE_ITEM = 'REMOVE_ITEM',

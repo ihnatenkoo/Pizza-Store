@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { useAppSelector } from '../hooks/useAppSelector';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { SET_FILTER } from '../store/pizzas/pizzas.slice';
 import { Flex } from '../styled/mixins';
 

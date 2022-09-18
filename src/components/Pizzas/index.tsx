@@ -1,12 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { GET_PIZZA_DATA } from '../../store/pizzas/pizzas.slice';
-import { IPizza } from '../../store/types';
 import { Flex } from '../../styled/mixins';
+
+import { IPizza } from '../../types/';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { GET_PIZZA_DATA } from '../../store/pizzas/pizzas.slice';
+
 import Skeleton from '../Skeleton';
 import PizzasItem from './PizzaItem';
+import { filterAndSortData } from '../../utils/filterAndSortData';
 
 const PizzasWrapper = styled.div`
 	margin: 0 auto;
@@ -24,6 +26,7 @@ const Pizzas: FC = () => {
 	const dispatch = useAppDispatch();
 	const pizzaData = useAppSelector((state) => state.pizzas.pizzaData);
 	const activeFilter = useAppSelector((state) => state.pizzas.activeFilter);
+	const sortRange = useAppSelector((state) => state.pizzas.SortRange);
 	const isError = useAppSelector((state) => state.pizzas.isError);
 	const isLoading = useAppSelector((state) => state.pizzas.isLoading);
 
@@ -33,16 +36,11 @@ const Pizzas: FC = () => {
 		dispatch(GET_PIZZA_DATA());
 	}, []);
 
-	useEffect(() => {
-		setFilteredData(filterData(pizzaData, activeFilter));
-	}, [pizzaData, activeFilter]);
+	console.log(filteredData);
 
-	const filterData = (data: Array<IPizza>, filter: string): Array<IPizza> => {
-		if (filter === 'all') return data;
-		return data.filter((pizza) =>
-			pizza.category.some((i) => i === filter.toLowerCase())
-		);
-	};
+	useEffect(() => {
+		setFilteredData(filterAndSortData(pizzaData, activeFilter, sortRange));
+	}, [pizzaData, activeFilter, sortRange]);
 
 	if (isError) {
 		return <p>Loading Error...</p>;
