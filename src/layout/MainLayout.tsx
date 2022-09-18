@@ -23,11 +23,15 @@ const Box = styled.div`
 	}
 `;
 
-const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+interface IMainLayout extends PropsWithChildren {
+	withCart?: boolean;
+}
+
+const MainLayout: FC<IMainLayout> = ({ children, withCart = false }) => {
 	return (
 		<Main>
 			<Box>
-				<Header />
+				<Header withCart={withCart} />
 				{children}
 			</Box>
 		</Main>

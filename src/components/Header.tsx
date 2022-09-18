@@ -38,7 +38,11 @@ const Description = styled.span`
 	color: ${(props) => props.theme.colors.grayDark};
 `;
 
-const Header: FC = () => {
+interface IHeader {
+	withCart?: boolean;
+}
+
+const Header: FC<IHeader> = ({ withCart = false }) => {
 	return (
 		<StyledHeader>
 			<Intro>
@@ -50,7 +54,7 @@ const Header: FC = () => {
 					</div>
 				</Link>
 			</Intro>
-			<Cart />
+			{withCart && <Cart />}
 		</StyledHeader>
 	);
 };

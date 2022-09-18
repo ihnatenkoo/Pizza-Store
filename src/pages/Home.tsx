@@ -5,7 +5,7 @@ import Navigation from '../components/Navigation';
 
 export const HomePage: FC = () => {
 	return (
-		<MainLayout>
+		<MainLayout withCart>
 			<Navigation />
 			<Pizzas />
 		</MainLayout>
