@@ -78,6 +78,11 @@ const ButtonsBlock = styled.div`
 		font-size: 19px;
 	}
 `;
+const EmptyList = styled.p`
+	font-weight: 700;
+	font-size: 22px;
+	color: ${(props) => props.theme.colors.orange};
+`;
 
 export const CartPage: FC = () => {
 	const dispatch = useAppDispatch();
@@ -102,6 +107,8 @@ export const CartPage: FC = () => {
 						<span>Clear cart</span>
 					</ClearCart>
 				</Header>
+
+				{!order.length && <EmptyList>Cart List is Empty</EmptyList>}
 
 				<OrderList>
 					{order.map((item) => (
