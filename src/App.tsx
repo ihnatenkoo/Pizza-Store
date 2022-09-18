@@ -1,11 +1,20 @@
 import 'material-icons/iconfont/material-icons.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import { FC } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { store } from './store';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { HomePage, CartPage } from './pages/';
+
+const mainToastsOpts = {
+	autoClose: 1500,
+	pauseOnFocusLoss: false,
+	hideProgressBar: true,
+	limit: 5,
+};
 
 const GlobalStyle = createGlobalStyle`
 	*, ::before, ::after {
@@ -31,6 +40,10 @@ const GlobalStyle = createGlobalStyle`
 	li {
 		list-style: none;
 	}
+	.Toastify__toast-container.Toastify__toast-container--top-center {
+	top: 25px;
+}
+
 `;
 
 const theme = {
@@ -71,6 +84,7 @@ const App: FC = () => {
 					</Routes>
 				</BrowserRouter>
 			</Provider>
+			<ToastContainer {...mainToastsOpts} />
 		</ThemeProvider>
 	);
 };

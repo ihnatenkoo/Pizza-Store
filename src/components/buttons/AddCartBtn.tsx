@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import {
 	ADD_ITEM,
@@ -26,6 +27,12 @@ const Button = styled.button`
 	}
 `;
 
+const ToastOrderTitle = styled.span`
+	font-weight: 700;
+	color: ${(props) => props.theme.colors.orange};
+`;
+const ToastOrderIcon = styled(ToastOrderTitle)``;
+
 interface ICartBtnProps {
 	orderData: IOrder;
 }
@@ -34,6 +41,22 @@ const AddCartBtn: FC<ICartBtnProps> = ({ orderData }) => {
 	const dispatch = useAppDispatch();
 
 	const addOrderItemHandler = () => {
+		toast.info(
+			<div>
+				<ToastOrderTitle className="text-red-500">
+					{orderData.title}
+				</ToastOrderTitle>
+				<span> add to cart</span>
+			</div>,
+			{
+				icon: () => (
+					<ToastOrderIcon className="material-icons-outlined">
+						shopping_cart
+					</ToastOrderIcon>
+				),
+				position: 'top-center',
+			}
+		);
 		dispatch(ADD_ITEM(orderData));
 		dispatch(CALCULATE_TOTAL_COST_COUNT());
 	};
@@ -45,4 +68,5 @@ const AddCartBtn: FC<ICartBtnProps> = ({ orderData }) => {
 		</Button>
 	);
 };
+
 export default AddCartBtn;

@@ -48,7 +48,7 @@ const ClearCart = styled.div`
 `;
 
 const Footer = styled.div`
-	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 0' })}
+	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 50px' })}
 	margin: 40px 0;
 `;
 

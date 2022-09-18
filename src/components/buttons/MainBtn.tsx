@@ -10,7 +10,7 @@ interface IBtnStyle {
 const Button = styled.button<IBtnStyle>`
 	${Flex({ justify: 'center', align: 'center', gap: '10px' })}
 	min-width: 200px;
-	padding: 17px 0;
+	padding: 15px 0;
 	border-radius: 30px;
 	font-weight: 700;
 	font-size: 16px;
