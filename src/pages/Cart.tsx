@@ -1,11 +1,15 @@
 import { FC } from 'react';
-import MainLayout from '../layout/MainLayout';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container, Flex } from '../styled/mixins';
+
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { CLEAR_CART } from '../store/cart/cart.slice';
+
+import MainLayout from '../layout/MainLayout';
 import OrderItem from '../components/OrderItem';
+import MainBtn from '../components/buttons/MainBtn';
 
 const Wrapper = styled.section`
 	${Container({})}
@@ -63,11 +67,17 @@ const TotalCount = styled(TotalTitle)`
 const CostTitle = styled(TotalTitle)``;
 const CostTotal = styled(TotalCount)`
 	${Flex({ align: 'flex-start' })}
-	min-width: 95px;
+
 	color: ${(props) => props.theme.colors.orange};
 `;
 
 const OrderList = styled.ul``;
+const ButtonsBlock = styled.div`
+	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 0' })}
+	> span {
+		font-size: 19px;
+	}
+`;
 
 export const CartPage: FC = () => {
 	const dispatch = useAppDispatch();
@@ -112,6 +122,16 @@ export const CartPage: FC = () => {
 						</CostTotal>
 					</FooterRight>
 				</Footer>
+
+				<ButtonsBlock>
+					<Link to="/">
+						<MainBtn appear="outline">
+							<span className="material-icons-outlined">arrow_back</span>
+							<div>Back to home</div>
+						</MainBtn>
+					</Link>
+					<MainBtn>Order now</MainBtn>
+				</ButtonsBlock>
 			</Wrapper>
 		</MainLayout>
 	);

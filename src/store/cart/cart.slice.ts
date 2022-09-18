@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { ActionTypesCart, IOrder } from '../types';
+import { ActionTypesCart } from '../types';
+import { IOrder } from '../../types';
 
 interface ICartInitialState {
 	order: Array<IOrder>;
