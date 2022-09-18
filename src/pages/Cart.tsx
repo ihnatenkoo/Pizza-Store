@@ -9,7 +9,6 @@ import OrderItem from '../components/OrderItem';
 
 const Wrapper = styled.section`
 	${Container({})}
-	margin-top: 95px;
 `;
 
 const Header = styled.div`
@@ -45,7 +44,7 @@ const ClearCart = styled.div`
 `;
 
 const Footer = styled.div`
-	${Flex({ justify: 'space-between' })}
+	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 0' })}
 	margin: 40px 0;
 `;
 

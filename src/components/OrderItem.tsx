@@ -6,18 +6,27 @@ import {
 	CHANGE_COUNT,
 	REMOVE_ITEM,
 } from '../store/cart/cart.slice';
-import { IOrder } from '../store/types';
+import { IOrder } from '../types/';
 import { Flex } from '../styled/mixins';
 
 const StyledOrderItem = styled.li`
-	${Flex({ justify: 'space-between', align: 'center' })}
+	${Flex({
+		justify: 'space-between',
+		align: 'center',
+		wrap: 'wrap',
+		gap: '15px 0',
+	})}
 	padding: 30px 0;
 	border-top: 1px solid #f4f4f4;
 `;
 
 const OrderInfo = styled.div`
 	${Flex({ align: 'center', gap: '15px' })}
-	min-width: 320px;
+	min-width: 100%;
+
+	@media ${(props) => props.theme.media.tablet} {
+		min-width: 320px;
+	}
 `;
 
 const OrderTitle = styled.h3`

@@ -10,7 +10,12 @@ interface IActiveProps {
 }
 
 const List = styled.ul`
+	padding: 0 34px;
 	${Flex({ justify: 'center', gap: '15px 10px', wrap: 'wrap' })}
+
+	@media ${(props) => props.theme.media.mobileL} {
+		padding: 0;
+	}
 `;
 
 const Item = styled.li<IActiveProps>`
