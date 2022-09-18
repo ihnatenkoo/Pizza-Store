@@ -10,7 +10,7 @@ interface IActiveProps {
 }
 
 const List = styled.ul`
-	${Flex({ gap: '10px' })}
+	${Flex({ justify: 'center', gap: '15px 10px', wrap: 'wrap' })}
 `;
 
 const Item = styled.li<IActiveProps>`

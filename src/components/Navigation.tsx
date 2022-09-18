@@ -6,7 +6,16 @@ import Categories from './Categories';
 import Sort from './Sort';
 
 const StyledNavigation = styled.nav`
-	${Flex({ justify: 'space-between', align: 'center' })}
+	${Flex({
+		justify: 'center',
+		align: 'center',
+		wrap: 'wrap',
+		gap: '20px',
+	})}
+
+	@media ${(props) => props.theme.media.tablet} {
+		justify-content: space-between;
+	}
 `;
 
 const Navigation: FC = () => {

@@ -16,7 +16,7 @@ const PizzasWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-	margin: 30px 0 25px;
+	margin: 40px 0 25px;
 	font-weight: 700;
 	font-size: 32px;
 	color: ${(props) => props.theme.colors.blackDark};

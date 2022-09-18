@@ -7,7 +7,7 @@ import Cart from './Cart';
 const StyledHeader = styled.header`
 	margin-bottom: 40px;
 	padding-bottom: 40px;
-	${Flex({ justify: 'space-between' })}
+	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 70px' })}
 	border-bottom: 1px solid #F7F7F7;
 `;
 
