@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPizza } from '../types';
+import { ActionTypesPizza } from '../types';
 
-enum ActionTypes {
-	SET_FILTER = 'SET_FILTER',
-}
 interface IPizzaInitialState {
 	pizzaData: Array<IPizza>;
 	activeFilter: string;
+	SortRange: string;
 	isLoading: boolean;
 	isError: boolean;
 }
@@ -14,6 +13,7 @@ interface IPizzaInitialState {
 const initialState: IPizzaInitialState = {
 	pizzaData: [],
 	activeFilter: 'all',
+	SortRange: 'None',
 	isLoading: false,
 	isError: false,
 };
@@ -33,8 +33,11 @@ const pizzaSlice = createSlice({
 	name: 'pizza',
 	initialState,
 	reducers: {
-		[ActionTypes.SET_FILTER]: (state, action: PayloadAction<string>) => {
+		[ActionTypesPizza.SET_FILTER]: (state, action: PayloadAction<string>) => {
 			state.activeFilter = action.payload;
+		},
+		[ActionTypesPizza.SET_SORT]: (state, action: PayloadAction<string>) => {
+			state.SortRange = action.payload;
 		},
 	},
 	extraReducers(builder) {
@@ -55,5 +58,5 @@ const pizzaSlice = createSlice({
 });
 
 const { actions, reducer } = pizzaSlice;
-export const { SET_FILTER } = actions;
+export const { SET_FILTER, SET_SORT } = actions;
 export default reducer;

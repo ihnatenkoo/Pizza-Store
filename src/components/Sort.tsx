@@ -1,12 +1,15 @@
 import { FC, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useAppSelector } from '../hooks/useAppSelector';
+import { SET_SORT } from '../store/pizzas/pizzas.slice';
 
 const sortList = [
 	'None',
 	'Price: Low',
 	'Price: Hight',
-	`Name: A-z`,
-	`Name: Z-a`,
+	`Name: Start`,
+	`Name: End`,
 ];
 
 interface IActiveProps {
@@ -67,15 +70,16 @@ const PopupItem = styled.li<IActiveProps>`
 `;
 
 const Sort: FC = () => {
+	const dispatch = useAppDispatch();
+	const sortBy = useAppSelector((state) => state.pizzas.SortRange);
 	const [showPopup, setShowPopup] = useState(false);
-	const [sortBy, setSortBy] = useState(sortList[0]);
 
 	const onClickTitleHandler = (): void => {
 		setShowPopup((prev) => !prev);
 	};
 
 	const onClickPopupItemHandler = (value: string): void => {
-		setSortBy(value);
+		dispatch(SET_SORT(value));
 		setShowPopup(false);
 	};
 

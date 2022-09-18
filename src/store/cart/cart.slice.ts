@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { ActionTypes, IOrder } from '../types';
+import { ActionTypesCart, IOrder } from '../types';
 
 interface ICartInitialState {
 	order: Array<IOrder>;
@@ -18,7 +18,7 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		[ActionTypes.ADD_ITEM]: (state, action: PayloadAction<IOrder>) => {
+		[ActionTypesCart.ADD_ITEM]: (state, action: PayloadAction<IOrder>) => {
 			if (state.order.some((item) => item.id === action.payload.id)) {
 				state.order = state.order.map((item) => {
 					if (item.id === action.payload.id) {
@@ -30,11 +30,11 @@ const cartSlice = createSlice({
 				state.order.push(action.payload);
 			}
 		},
-		[ActionTypes.REMOVE_ITEM]: (state, action: PayloadAction<string>) => {
+		[ActionTypesCart.REMOVE_ITEM]: (state, action: PayloadAction<string>) => {
 			state.order = state.order.filter((item) => item.id !== action.payload);
 		},
 
-		[ActionTypes.CHANGE_COUNT]: (
+		[ActionTypesCart.CHANGE_COUNT]: (
 			state,
 			action: { payload: { id: string; value: number } }
 		) => {
@@ -47,7 +47,7 @@ const cartSlice = createSlice({
 				})
 				.filter((item) => item.count > 0);
 		},
-		[ActionTypes.CALCULATE_TOTAL_COST_COUNT]: (state) => {
+		[ActionTypesCart.CALCULATE_TOTAL_COST_COUNT]: (state) => {
 			state.totalCost = +state.order
 				.reduce((curr, next) => {
 					return curr + next.count * next.cost;
@@ -58,7 +58,7 @@ const cartSlice = createSlice({
 				return curr + next.count;
 			}, 0);
 		},
-		[ActionTypes.CLEAR_CART]: (state) => {
+		[ActionTypesCart.CLEAR_CART]: (state) => {
 			state.order = [];
 			state.totalCost = 0;
 			state.totalCount = 0;
