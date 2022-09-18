@@ -36,8 +36,6 @@ const Pizzas: FC = () => {
 		dispatch(GET_PIZZA_DATA());
 	}, []);
 
-	console.log(filteredData);
-
 	useEffect(() => {
 		setFilteredData(filterAndSortData(pizzaData, activeFilter, sortRange));
 	}, [pizzaData, activeFilter, sortRange]);

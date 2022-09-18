@@ -6,9 +6,14 @@ import Cart from './Cart';
 
 const StyledHeader = styled.header`
 	margin-bottom: 40px;
-	padding-bottom: 40px;
-	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 70px' })}
+	padding-bottom: 20px;
+	${Flex({ justify: 'center', wrap: 'wrap', gap: '30px 70px' })}
 	border-bottom: 1px solid #F7F7F7;
+
+	@media ${(props) => props.theme.media.mobileL} {
+		padding-bottom: 40px;
+		justify-content: space-between;
+	}
 `;
 
 const Intro = styled.div`

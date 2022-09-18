@@ -8,7 +8,17 @@ const CartButton = styled.button`
 	min-width: 157px;
 	background-color: ${(props) => props.theme.colors.orange};
 	border-radius: ${(props) => props.theme.radius.radiusM};
+	box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.15);
 	cursor: pointer;
+
+	position: fixed;
+	left: 10px;
+	bottom: 15px;
+
+	@media ${(props) => props.theme.media.tablet} {
+		position: static;
+		box-shadow: none;
+	}
 
 	a {
 		${Flex({ justify: 'center' })}
