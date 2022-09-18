@@ -6,7 +6,7 @@ import Categories from './Categories';
 import Sort from './Sort';
 
 const StyledNavigation = styled.nav`
-	${Flex({ justify: 'space-between' })}
+	${Flex({ justify: 'space-between', align: 'center' })}
 `;
 
 const Navigation: FC = () => {
@@ -17,4 +17,5 @@ const Navigation: FC = () => {
 		</StyledNavigation>
 	);
 };
+
 export default Navigation;
