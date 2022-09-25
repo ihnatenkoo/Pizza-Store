@@ -8,8 +8,9 @@ interface IBtnStyle {
 }
 
 const Button = styled.button<IBtnStyle>`
-	${Flex({ justify: 'center', align: 'center', gap: '10px' })}
+	${Flex({ justify: 'center', align: 'center', gap: '5px' })}
 	min-width: 200px;
+	max-height: 49px;
 	padding: 15px 0;
 	border-radius: 30px;
 	font-weight: 700;
@@ -21,6 +22,12 @@ const Button = styled.button<IBtnStyle>`
 	&:hover {
 		text-decoration: underline;
 	}
+
+	${(props) =>
+		props.hidden &&
+		css`
+			display: none;
+		`};
 
 	${(props) =>
 		props.appear === 'outline' &&
@@ -43,12 +50,18 @@ const Button = styled.button<IBtnStyle>`
 
 interface IMainBtn extends PropsWithChildren {
 	appear?: TStyles;
+	hidden?: boolean;
 	callback?: () => void;
 }
 
-const MainBtn: FC<IMainBtn> = ({ children, appear = 'main', callback }) => {
+const MainBtn: FC<IMainBtn> = ({
+	children,
+	appear = 'main',
+	hidden = false,
+	callback,
+}) => {
 	return (
-		<Button onClick={callback} appear={appear}>
+		<Button onClick={callback} appear={appear} hidden={hidden}>
 			{children}
 		</Button>
 	);

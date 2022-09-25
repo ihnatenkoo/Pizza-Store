@@ -5,7 +5,6 @@ import Header from '../components/Header';
 const Main = styled.main`
 	padding: 16px;
 	min-width: 100vw;
-	min-height: 100vh;
 	background-color: ${(props) => props.theme.colors.yellow};
 
 	@media ${(props) => props.theme.media.tablet} {
@@ -14,6 +13,7 @@ const Main = styled.main`
 `;
 
 const Box = styled.div`
+	min-height: 100vh;
 	padding: 30px 10px 100px;
 	background-color: ${(props) => props.theme.colors.white};
 	box-shadow: ${(props) => props.theme.shadows.main};

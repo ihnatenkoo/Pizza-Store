@@ -49,7 +49,7 @@ const ClearCart = styled.div`
 
 const Footer = styled.div`
 	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 50px' })}
-	margin: 40px 0;
+	margin: 40px 0 80px;
 `;
 
 const FooterLeft = styled.div`
@@ -73,9 +73,13 @@ const CostTotal = styled(TotalCount)`
 
 const OrderList = styled.ul``;
 const ButtonsBlock = styled.div`
-	${Flex({ justify: 'space-between', wrap: 'wrap', gap: '30px 0' })}
-	> span {
-		font-size: 19px;
+	${Flex({ justify: 'center', wrap: 'wrap-reverse', gap: '20px 0' })}
+	span {
+		font-size: 16px;
+	}
+
+	@media ${(props) => props.theme.media.mobileL} {
+		justify-content: space-between;
 	}
 `;
 const EmptyList = styled.p`
@@ -137,7 +141,7 @@ export const CartPage: FC = () => {
 							<div>Back to home</div>
 						</MainBtn>
 					</Link>
-					<MainBtn>Order now</MainBtn>
+					<MainBtn hidden={!order.length}>Order now</MainBtn>
 				</ButtonsBlock>
 			</Wrapper>
 		</MainLayout>
