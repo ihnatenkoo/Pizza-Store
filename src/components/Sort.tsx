@@ -1,8 +1,9 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { enumSortList, IActiveProps } from '../types';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { SET_SORT } from '../store/pizzas/pizzas.slice';
+import { useOutsideClick } from '../hooks/useOutsideClick';
 
 const sortList = [
 	enumSortList.NONE,
@@ -66,25 +67,25 @@ const PopupItem = styled.li<IActiveProps>`
 `;
 
 const Sort: FC = () => {
+	const { ref, isShow, setIsShow } = useOutsideClick(false);
 	const dispatch = useAppDispatch();
 	const sortBy = useAppSelector((state) => state.pizzas.SortRange);
-	const [showPopup, setShowPopup] = useState(false);
 
 	const onClickTitleHandler = (): void => {
-		setShowPopup((prev) => !prev);
+		setIsShow((prev) => !prev);
 	};
 
 	const onClickPopupItemHandler = (value: string): void => {
 		dispatch(SET_SORT(value));
-		setShowPopup(false);
+		setIsShow(false);
 	};
 
 	return (
-		<Wrapper>
+		<Wrapper ref={ref}>
 			<Title onClick={onClickTitleHandler}>
 				Sort by: <SortLabel>{sortBy}</SortLabel>
 			</Title>
-			{showPopup && (
+			{isShow && (
 				<PopupList>
 					{sortList.map((item) => (
 						<PopupItem
