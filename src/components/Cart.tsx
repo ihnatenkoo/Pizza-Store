@@ -1,11 +1,14 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAppDispatch } from '../hooks';
 import { useAppSelector } from '../hooks/useAppSelector';
+import { CALCULATE_TOTAL_COST_COUNT } from '../store/cart/cart.slice';
 import { Flex } from '../styled/mixins';
 
 const CartButton = styled.button`
-	min-width: 157px;
+	width: 157px;
+	max-width: fit-content;
 	background-color: ${(props) => props.theme.colors.orange};
 	border-radius: ${(props) => props.theme.radius.radiusM};
 	box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.15);
@@ -49,8 +52,13 @@ const Text = styled.div`
 `;
 
 const Cart: FC = () => {
+	const dispatch = useAppDispatch();
 	const totalCost = useAppSelector((state) => state.cart.totalCost);
 	const totalCount = useAppSelector((state) => state.cart.totalCount);
+
+	useEffect(() => {
+		dispatch(CALCULATE_TOTAL_COST_COUNT());
+	}, []);
 
 	return (
 		<CartButton>

@@ -3,6 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { ActionTypesCart } from '../types';
 import { IOrder } from '../../types';
 
+const LS_ORDER_KEY = 'order';
 interface ICartInitialState {
 	order: Array<IOrder>;
 	totalCost: string;
@@ -10,7 +11,7 @@ interface ICartInitialState {
 }
 
 const initialState: ICartInitialState = {
-	order: [],
+	order: JSON.parse(localStorage.getItem(LS_ORDER_KEY) ?? '[]'),
 	totalCost: '0.00',
 	totalCount: 0,
 };
@@ -30,9 +31,11 @@ const cartSlice = createSlice({
 			} else {
 				state.order.push(action.payload);
 			}
+			localStorage.setItem(LS_ORDER_KEY, JSON.stringify(state.order));
 		},
 		[ActionTypesCart.REMOVE_ITEM]: (state, action: PayloadAction<string>) => {
 			state.order = state.order.filter((item) => item.id !== action.payload);
+			localStorage.setItem(LS_ORDER_KEY, JSON.stringify(state.order));
 		},
 
 		[ActionTypesCart.CHANGE_COUNT]: (
@@ -47,6 +50,7 @@ const cartSlice = createSlice({
 					return item;
 				})
 				.filter((item) => item.count > 0);
+			localStorage.setItem(LS_ORDER_KEY, JSON.stringify(state.order));
 		},
 		[ActionTypesCart.CALCULATE_TOTAL_COST_COUNT]: (state) => {
 			state.totalCost = state.order
@@ -63,6 +67,7 @@ const cartSlice = createSlice({
 			state.order = [];
 			state.totalCost = '0.00';
 			state.totalCount = 0;
+			localStorage.setItem(LS_ORDER_KEY, '[]');
 		},
 	},
 });
